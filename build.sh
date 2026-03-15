@@ -37,8 +37,8 @@ rm -rf _artx
 echo "=== Building writing ==="
 if ! command -v pandoc &>/dev/null; then
   echo "Installing pandoc..."
-  curl -sL https://github.com/jgm/pandoc/releases/download/3.6.4/pandoc-3.6.4-linux-amd64.tar.gz | tar xz
-  export PATH="$PWD/pandoc-3.6.4/bin:$PATH"
+  curl -sL https://github.com/jgm/pandoc/releases/download/3.6.4/pandoc-3.6.4-linux-amd64.tar.gz | tar xz -C /tmp
+  export PATH="/tmp/pandoc-3.6.4/bin:$PATH"
 fi
 git clone --depth 1 https://github.com/meltflake/writing.git _writing
 cd _writing && bash build.sh tianshu.md tianshu.html && cd ..
