@@ -1,0 +1,18 @@
+name: Rebuild on sub-project update
+on:
+  repository_dispatch:
+    types: [rebuild]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Touch trigger file
+        run: |
+          date -u > .last-rebuild
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .last-rebuild
+          git commit -m "rebuild: triggered by ${{ github.event.client_payload.repo }}"
+          git push
