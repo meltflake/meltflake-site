@@ -3,6 +3,9 @@ on:
   repository_dispatch:
     types: [rebuild]
 
+permissions:
+  contents: write
+
 jobs:
   trigger:
     runs-on: ubuntu-latest
