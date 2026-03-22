@@ -8,7 +8,7 @@ rm -rf "$DIST"
 mkdir -p "$DIST"
 
 # 1. Copy static root files
-cp index.html "$DIST/"
+cp index.html robots.txt manifest.json "$DIST/"
 cp favicon* apple-touch-icon.png android-chrome-*.png "$DIST/" 2>/dev/null || true
 cp -r legal "$DIST/"
 
