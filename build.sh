@@ -36,7 +36,7 @@ rm -rf _artx
 # 5. Build sg-charity (Astro, site/ subdirectory)
 echo "=== Building sg-charity ==="
 git clone --depth 1 https://github.com/meltflake/sg-charity.git _sg-charity
-cd _sg-charity/site && npm ci && npm run build && cd ../..
+cd _sg-charity/site && npm ci --legacy-peer-deps && npm run build && cd ../..
 cp -r _sg-charity/site/dist "$DIST/sg-charity"
 rm -rf _sg-charity
 
