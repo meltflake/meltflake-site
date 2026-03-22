@@ -33,7 +33,14 @@ cd _artx && npm ci && npm run build && cd ..
 cp -r _artx/out "$DIST/artx"
 rm -rf _artx
 
-# 5. Build writing (Pandoc)
+# 5. Build sg-charity (Astro, site/ subdirectory)
+echo "=== Building sg-charity ==="
+git clone --depth 1 https://github.com/meltflake/sg-charity.git _sg-charity
+cd _sg-charity/site && npm ci && npm run build && cd ../..
+cp -r _sg-charity/site/dist "$DIST/sg-charity"
+rm -rf _sg-charity
+
+# 6. Build writing (Pandoc)
 echo "=== Building writing ==="
 if ! command -v pandoc &>/dev/null; then
   echo "Installing pandoc..."
