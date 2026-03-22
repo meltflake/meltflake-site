@@ -33,10 +33,16 @@ cd _artx && npm ci && npm run build && cd ..
 cp -r _artx/out "$DIST/artx"
 rm -rf _artx
 
-# 5. Build sg-charity (Astro, site/ subdirectory)
+# 5. Build sg-charity (Astro 6, requires Node 22+)
 echo "=== Building sg-charity ==="
+echo "Installing Node 22 for Astro 6..."
+curl -sL https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz | tar xJ -C /tmp
+ORIG_PATH="$PATH"
+export PATH="/tmp/node-v22.14.0-linux-x64/bin:$PATH"
+echo "Node version: $(node -v)"
 git clone --depth 1 https://github.com/meltflake/sg-charity.git _sg-charity
 cd _sg-charity/site && npm ci --legacy-peer-deps && npm run build && cd ../..
+export PATH="$ORIG_PATH"
 cp -r _sg-charity/site/dist "$DIST/sg-charity"
 rm -rf _sg-charity
 
