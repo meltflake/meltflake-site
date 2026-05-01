@@ -12,28 +12,21 @@ cp index.html robots.txt manifest.json "$DIST/"
 cp favicon* apple-touch-icon.png android-chrome-*.png "$DIST/" 2>/dev/null || true
 cp -r legal "$DIST/"
 
-# 2. Build aisg (Astro)
-echo "=== Building aisg ==="
-git clone --depth 1 https://github.com/meltflake/aisg.git _aisg
-cd _aisg && npm ci && npm run build && cd ..
-cp -r _aisg/dist "$DIST/aisg"
-rm -rf _aisg
-
-# 3. Build creatorcut (Astro)
+# 2. Build creatorcut (Astro)
 echo "=== Building creatorcut ==="
 git clone --depth 1 https://github.com/meltflake/creatorcut.git _creatorcut
 cd _creatorcut && npm ci && npm run build && cd ..
 cp -r _creatorcut/dist "$DIST/creatorcut"
 rm -rf _creatorcut
 
-# 4. Build artx (Next.js static export)
+# 3. Build artx (Next.js static export)
 echo "=== Building artx ==="
 git clone --depth 1 https://github.com/meltflake/artx.git _artx
 cd _artx && npm ci && npm run build && cd ..
 cp -r _artx/out "$DIST/artx"
 rm -rf _artx
 
-# 5. Build sg-charity (Astro 6, requires Node 22+)
+# 4. Build sg-charity (Astro 6, requires Node 22+)
 echo "=== Building sg-charity ==="
 echo "Installing Node 22 for Astro 6..."
 curl -sL https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz | tar xJ -C /tmp
@@ -46,7 +39,7 @@ export PATH="$ORIG_PATH"
 cp -r _sg-charity/site/dist "$DIST/sg-charity"
 rm -rf _sg-charity
 
-# 6. Build writing (Pandoc)
+# 5. Build writing (Pandoc)
 echo "=== Building writing ==="
 if ! command -v pandoc &>/dev/null; then
   echo "Installing pandoc..."
